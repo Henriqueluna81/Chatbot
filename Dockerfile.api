@@ -12,7 +12,10 @@ COPY . .
 
 ENV FLASK_APP=app.py
 
-EXPOSE 5000
+# Definir engine WEBJS para Waha
+ENV WHATSAPP_DEFAULT_ENGINE=WEBJS
+
+# Expõe as portas 5000 para Flask e 3000 para WAHA
+EXPOSE 5000 3000
 
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000", "--debug"]
- 

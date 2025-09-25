@@ -4,7 +4,8 @@ services:
     image: devlikeapro/waha:latest
     container_name: wpp_bot_waha
     restart: always
-
+    environment:
+      - WHATSAPP_DEFAULT_ENGINE=WEBJS
     ports:
       - '3000:3000'
 
