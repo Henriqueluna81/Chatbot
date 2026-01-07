@@ -1,8 +1,6 @@
-import time
-import random
-
 from flask import Flask, request, jsonify
 
+from bot.ai_bot import AIBot
 from services.waha import Waha
 
 
@@ -16,14 +14,17 @@ def webhook():
     print(f'EVENTO RECEBIDO: {data}')
 
     waha = Waha()
+    ai_bot = AIBot()
 
     chat_id = data['payload']['from']
+    received_message = data['payload']['body']
 
     waha.start_typing(chat_id=chat_id)
-    time.sleep(random.randint(3, 10))
+
+    response = ai_bot.invoke(question=received_message)
     waha.send_message(
         chat_id=chat_id,
-        message='Resposta Automática :)',
+        message=response,
     )
     waha.stop_typing(chat_id=chat_id)
 
